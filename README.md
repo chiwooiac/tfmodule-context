@@ -27,12 +27,12 @@ output "name_prefix" {
   value = module.ctx.name_prefix
 }
 
-output "tags" {
-  value = module.ctx.tags
-}
-
 output "project" {
   value = module.ctx.project
+}
+
+output "tags" {
+  value = module.ctx.tags
 }
 ```
 

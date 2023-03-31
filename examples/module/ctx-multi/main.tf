@@ -1,7 +1,6 @@
 module "ctx" {
   source = "../../.."
   context = {
-    aws_profile  = "my_aws_profile"
     region       = "ap-northeast-2"
     project      = "cloudnow"
     environment  = "Production"

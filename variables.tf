@@ -1,6 +1,5 @@
 variable "context" {
   type = object({
-    aws_profile = string # describe a specifc profile to access a aws cli
     region      = string # describe default region to create a resource from aws
     project     = string # project name is usally account's project name or platform name
     environment = string # Runtime Environment such as develop, stage, production
@@ -48,6 +47,5 @@ locals {
     Team        = var.context.team
     Owner       = var.context.owner
   }
-
 
 }

@@ -5,7 +5,6 @@ locals {
 
 output "context" {
   value = {
-    aws_profile  = var.context.aws_profile
     region       = var.context.region
     region_alias = local.region_alias
     project      = var.context.project
