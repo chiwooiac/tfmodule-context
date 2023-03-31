@@ -12,17 +12,19 @@ output "context" {
     env_alias    = local.env_alias
     owner        = var.context.owner
     team         = var.context.team
-    cost_center  = var.context.cost_center
     domain       = var.context.domain
     pri_domain   = var.context.pri_domain
     name_prefix  = local.name_prefix
     tags         = local.tags
-    eks_name     = var.context.project
+    cost_center  = var.context.cost_center
+    aws_profile  = var.context.aws_profile
   }
 }
 
 output "context_string" {
-  value = join(",", [for key, value in var.context : "${key}=${value}"])
+  value = join("\n", [
+  for key, value in var.context : (value != null ? "${key}=${value}" : "${key}=")
+  ])
 }
 
 output "name_prefix" {
@@ -34,7 +36,7 @@ output "tags" {
 }
 
 output "tags_string" {
-  value = join(",", [for key, value in local.tags : "${key}=${value}"])
+  value = join(",", [for key, value in local.tags : "\\n${key}=${value}"])
 }
 
 output "region" {
@@ -66,7 +68,7 @@ output "team" {
 }
 
 output "cost_center" {
-  value = var.context.cost_center
+  value = var.context.cost_center == null ? "" : var.context.cost_center
 }
 
 output "domain" {

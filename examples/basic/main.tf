@@ -1,5 +1,5 @@
 module "ctx" {
-  source = "../module/ctx-basic"
+  source = "../module/ctx-basic/"
 }
 
 output "name_prefix" {
@@ -45,23 +45,34 @@ output "pri_domain" {
   value = module.ctx.pri_domain
 }
 
-output "project_team" {
-  value = module.ctx.tags.Team
+output "tags" {
+  value = module.ctx.tags
 }
 
 output "context_variables" {
   value = <<EOT
 context_variables ---------------
-${module.ctx.name_prefix}
-${module.ctx.region}
-${module.ctx.region_alias}
-${module.ctx.name_prefix}
-${module.ctx.environment}
-${module.ctx.env_alias}
-${module.ctx.team}
-${module.ctx.owner}
-${module.ctx.domain}
+  name_prefix: ${module.ctx.name_prefix}
+       region: ${module.ctx.region}
+ region_alias: ${module.ctx.region_alias}
+  environment: ${module.ctx.environment}
+    env_alias: ${module.ctx.env_alias}
+         team: ${module.ctx.team}
+        owner: ${module.ctx.owner}
+       domain: ${module.ctx.domain}
+   pri_domain: ${module.ctx.pri_domain}
+  cost_center: ${module.ctx.cost_center}
+  aws_profile: ${module.ctx.aws_profile == null ? "": module.ctx.aws_profile }
 context_variables ---------------
 EOT
 
+  #aws_profile: ${try(module.ctx.aws_profile,"")}
+}
+
+output "aaaaa" {
+  value = try(module.ctx.aws_profile,"")
+}
+
+output "context_string" {
+  value = module.ctx.context_string
 }

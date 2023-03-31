@@ -5,7 +5,8 @@ variable "context" {
     environment = string # Runtime Environment such as develop, stage, production
     owner       = string # project owner
     team        = string # Team name of Devops Transformation
-    cost_center = number # Cost Center
+    cost_center = optional(string) # Cost Center
+    aws_profile = optional(string) # describe a specifc profile to access a aws cli
     domain      = string # public toolchain domain name (ex, tools.customer.co.kr)
     pri_domain  = string # private domain name (ex, tools.customer.co.kr)
   })
@@ -41,7 +42,13 @@ locals {
 
   name_prefix = format("%s-%s%s", var.context.project, local.region_alias, local.env_alias)
 
-  tags = {
+  tags = var.context.cost_center != null ? {
+    Project     = var.context.project
+    Environment = var.context.environment
+    Team        = var.context.team
+    Owner       = var.context.owner
+    CostCenter  = var.context.cost_center
+  } : {
     Project     = var.context.project
     Environment = var.context.environment
     Team        = var.context.team

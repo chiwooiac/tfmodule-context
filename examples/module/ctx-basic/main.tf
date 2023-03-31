@@ -4,11 +4,12 @@ module "ctx" {
     region      = "ap-northeast-2"
     project     = "basic"
     environment = "Development"
-    owner       = "dx@bespinglobal.com"
+    owner       = "admin@symplesims.io"
     team        = "DX"
-    cost_center = "20211210"
-    domain      = "basic"
-    pri_domain  = "basic.intranet"
+    domain      = "symplesims"
+    pri_domain  = "symplesims.local"
+    # cost_center = "20211210"
+    # aws_profile = "dev"
   }
 }
 
@@ -56,10 +57,18 @@ output "cost_center" {
   value = module.ctx.cost_center
 }
 
+output "aws_profile" {
+  value = module.ctx.context.aws_profile
+}
+
 output "domain" {
   value = module.ctx.domain
 }
 
 output "pri_domain" {
   value = module.ctx.pri_domain
+}
+
+output "context_string" {
+  value = module.ctx.context_string
 }
